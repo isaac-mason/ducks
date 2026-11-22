@@ -1,0 +1,23 @@
+{
+    "name": "ducks",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc --noEmit && vite build",
+        "preview": "vite preview",
+        "typecheck": "tsc --noEmit",
+        "duck": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python blender/duck.py"
+    },
+    "dependencies": {
+        "gpucat": "github:isaac-mason/gpucat#13af8ce",
+        "math": "^0.1.0",
+        "tumble.js": "0.0.0-canary-20261108-86bb52a5"
+    },
+    "devDependencies": {
+        "@webgpu/types": "^0.1.74",
+        "typescript": "^7.0.2",
+        "vite": "^8.3.6"
+    }
+}
