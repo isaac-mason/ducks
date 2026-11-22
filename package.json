@@ -11,7 +11,7 @@
         "duck": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python blender/duck.py"
     },
     "dependencies": {
-        "gpucat": "github:isaac-mason/gpucat#13af8ce",
+        "gpucat": "0.0.0-canary-20261122-3e22605b",
         "math": "^0.1.0",
         "tumble.js": "0.0.0-canary-20261108-86bb52a5"
     },

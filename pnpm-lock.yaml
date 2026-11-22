@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       gpucat:
-        specifier: github:isaac-mason/gpucat#13af8ce
-        version: https://codeload.github.com/isaac-mason/gpucat/tar.gz/13af8ce7739399273b819c91852fe9090c96dbcc
+        specifier: 0.0.0-canary-20261122-3e22605b
+        version: 0.0.0-canary-20261122-3e22605b
       math:
         specifier: ^0.1.0
         version: 0.1.0
@@ -273,9 +273,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  gpucat@https://codeload.github.com/isaac-mason/gpucat/tar.gz/13af8ce7739399273b819c91852fe9090c96dbcc:
-    resolution: {tarball: https://codeload.github.com/isaac-mason/gpucat/tar.gz/13af8ce7739399273b819c91852fe9090c96dbcc}
-    version: 0.0.0-alpha.1
+  gpucat@0.0.0-canary-20261122-3e22605b:
+    resolution: {integrity: sha512-3pK8SJ+Xgam4UbZmfes6abGKI50O5viLImY6vc4Qq7GgVn/nY45ru8/gPZ0JPg7YNuH2758+X7HEKJnmH8j8LQ==}
 
   lightningcss-android-arm64@1.33.0:
     resolution: {integrity: sha512-gEpRTalKdosp4Bb8qWtc2iOgE5SeIHlpS1up9bFq2wAyYhl1UdTObYiHe98zEM9SQvSoqQZ1IQD0JNpg3Ml5pg==}
@@ -556,7 +555,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  gpucat@https://codeload.github.com/isaac-mason/gpucat/tar.gz/13af8ce7739399273b819c91852fe9090c96dbcc:
+  gpucat@0.0.0-canary-20261122-3e22605b:
     dependencies:
       math: 0.1.0
 
