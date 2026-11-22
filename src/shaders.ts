@@ -75,6 +75,8 @@ export function init(c: ShaderConstants, water: WaterInputs) {
     const WATERHIT_STEPS = 6;
     const WATERHIT_RELAXATION = 0.7;
     const DROPLET_HALF_SIZE = 1 / PIXELS_PER_UNIT;
+    const SPLASH_RING_LIFE = 1.6;
+    const SPLASH_RING_BRIGHTNESS = 0.7;
     const PERCEPTUAL_WEIGHTS = vec3(2, 4, 3);
     const PALETTE = palette.rgb().map((c) => constant(c));
 
@@ -349,17 +351,24 @@ export function init(c: ShaderConstants, water: WaterInputs) {
                     If(onCollar, () => foam.assign(1));
                 });
 
+                const splashRing = Var('splashRing', f32(0));
                 Loop(MAX_SPLASHES, ({ i }) => {
                     const s = index(water.splashes, i).toVar('splash');
                     const age = time.sub(s.z).toVar('age');
+                    const life = age.div(SPLASH_RING_LIFE).toVar('life');
                     const alive = s.w
                         .greaterThan(0)
-                        .and(age.greaterThanEqual(0))
-                        .and(age.lessThan(1.2));
+                        .and(life.greaterThanEqual(0))
+                        .and(life.lessThan(1));
+                    const fade = sub(1, smoothstep(0.15, 1, life)).mul(s.w.mul(0.5).add(0.5)).toVar('fade');
                     const radius = age.mul(add(1.6, s.w.mul(1.6)));
-                    const onRing = length(p.xz.sub(s.xy)).sub(radius).abs().lessThan(0.09);
-                    If(alive.and(onRing), () => foam.assign(1));
+                    const width = mix(0.08, 0.035, life);
+                    const onRing = length(p.xz.sub(s.xy)).sub(radius).abs().lessThan(width);
+                    const artPixel = floor(p.xz.mul(PIXELS_PER_UNIT));
+                    const survivesDissolve = hash(artPixel.add(s.xy)).lessThan(fade);
+                    If(alive.and(onRing).and(survivesDissolve), () => splashRing.assign(max(splashRing, add(0.65, fade.mul(0.35)))));
                 });
+                color.assign(mix(color, FOAM, splashRing.mul(SPLASH_RING_BRIGHTNESS)));
 
                 result.assign(select(color, FOAM, foam.greaterThan(0.5)));
             });
